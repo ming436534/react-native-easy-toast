@@ -32,7 +32,7 @@ export default class Toast extends Component {
         this.state = {
             isShow: false,
             text: '',
-            opacityValue: new Animated.Value(this.props.opacity),
+            opacityValue: new Animated.Value(0),
         }
     }
 
@@ -49,6 +49,7 @@ export default class Toast extends Component {
             {
                 toValue: this.props.opacity,
                 duration: this.props.fadeInDuration,
+                useNativeDriver: true,
             }
         )
         this.animation.start(() => {
@@ -70,6 +71,7 @@ export default class Toast extends Component {
                 {
                     toValue: 0.0,
                     duration: this.props.fadeOutDuration,
+                    useNativeDriver: true,
                 }
             )
             this.animation.start(() => {
@@ -110,6 +112,7 @@ export default class Toast extends Component {
             >
                 <Animated.View
                     style={[styles.content, { opacity: this.state.opacityValue }, this.props.style]}
+                    useNativeDriver
                 >
                     {React.isValidElement(this.state.text) ? this.state.text : <Text style={this.props.textStyle}>{this.state.text}</Text>}
                 </Animated.View>
